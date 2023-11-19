@@ -1,4 +1,4 @@
-import Search from "../Search";
+import Search from "../components/Search";
 import SearchResults from "../components/CurrentSearch";
 import Nav from "../components/nav";
 

@@ -6,13 +6,11 @@ import { useAppSelector } from "../tools/hooks";
 
 function HistoryPage() {
     const searches = useAppSelector(getHistorySearches)
-    console.log("search", searches)
     return (
         <>
             <Nav />
             Past searches:
             {searches.map(search => <SearchResults {...search} />)}
-            {/* <SearchResults /> */}
         </>
     )
 }
