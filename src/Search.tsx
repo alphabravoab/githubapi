@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form"
-import { searchGithub } from './tools/requests';
-import { useAppDispatch } from './tools/hooks';
-import { setSearch } from './reducers/search';
+import { searchGithub } from "./tools/requests";
+import { useAppDispatch } from "./tools/hooks";
+import { setSearch } from "./reducers/search";
 import { addToSearchHistory } from "./reducers/searchHistory";
 
 type Inputs = {
@@ -31,7 +31,7 @@ function Search() {
     <>
       <div>
         <form  onSubmit={handleSubmit(onSubmit)}>
-          <input placeholder='Search' {...register("q")} /><input type="submit" />
+          <input placeholder="Search" {...register("q")} /><input type="submit" />
         </form>
       </div>
     </>

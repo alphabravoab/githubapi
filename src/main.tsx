@@ -1,14 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { Provider } from "react-redux"
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import SearchPage from './pages/SearchPage.tsx';
-import { store } from './store.ts'
-import './index.css'
-import HistoryPage from './pages/historyPage.tsx';
+import SearchPage from "./pages/SearchPage.tsx";
+import { store } from "./store.ts"
+import "./index.css"
+import HistoryPage from "./pages/historyPage.tsx";
 
 
 const router = createBrowserRouter([
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
 ])
 
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
