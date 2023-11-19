@@ -25,7 +25,6 @@ type RenderProps = {
 }
 
 function Result({result}: RenderProps) {
-    console.log("test", result);
     const classes = useStyles();
     return (
         <div className={classes.container}>
