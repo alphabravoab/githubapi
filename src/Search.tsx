@@ -1,14 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form"
 import { searchGithub } from './tools/requests';
-import { Repo } from './type/Repo';
 import { useAppDispatch } from './tools/hooks';
 import { setSearch } from './reducers/search';
-
-type Response = {
-    data: {
-    items: Array<Repo>;
-  }
-}
+import { addToSearchHistory } from "./reducers/searchHistory";
 
 type Inputs = {
     q: string;
@@ -22,8 +16,16 @@ function Search() {
     } = useForm<Inputs>();
   
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-      console.log("submitted", data)
-      searchGithub(data).then((x: Response) => dispatch(setSearch(x.data.items))); 
+      const transformedRequest = {
+        q: encodeURI(data.q)
+      }
+      searchGithub(transformedRequest).then((resp) => {
+        dispatch(setSearch(resp.data.items))
+        dispatch(addToSearchHistory({
+          search: data.q,
+          results: resp.data.items.slice(1,9)
+        }))
+      }); 
     }
   return (
     <>

@@ -30,7 +30,7 @@ const useStyles = createUseStyles({
 
 function Nav() {
     const classes = useStyles()
-    let { pathname} = useLocation();
+    const { pathname} = useLocation();
 
     return (
         <div className={classes.container}>

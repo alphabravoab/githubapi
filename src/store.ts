@@ -1,10 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 import searchReducer from "./reducers/search"
-
+import searchHistoryReducer from "./reducers/searchHistory"
 
 export const store = configureStore({
   reducer: {
-    search: searchReducer
+    search: searchReducer,
+    searchHistory: searchHistoryReducer
   },
 })
 

@@ -1,5 +1,5 @@
 import Search from "../Search";
-import SearchResults from "../components/SearchResults";
+import SearchResults from "../components/CurrentSearch";
 import Nav from "../components/nav";
 
 
