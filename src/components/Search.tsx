@@ -24,31 +24,51 @@ function Search() {
 
   useEffect(() => {
     const data = getValues()
+    let qstring = data.q;
+    if(data.language) {
+      qstring = qstring + `+language=${data.language}`
+    }
+    if(data.starGazers) {
+      qstring = qstring + `+starGazers=${data.starGazers}`
+    }
+    if (data.followers) {
+      qstring = qstring + `+followers=${data.followers}`
+    }
     const transformedRequest = {
-      q: encodeURI(data.q),
+      q: qstring,
       sort
     }
     if(data.q) {
       searchGithub(transformedRequest).then((resp) => {
         dispatch(setSearch(resp.data.items))
-        dispatch(addToSearchHistory({
-          search: data.q,
-          results: resp.data.items.slice(1,9)
-        }))
+        // dispatch(addToSearchHistory({
+        //   search: data.q,
+        //   results: resp.data.items.slice(1,9)
+        // }))
       });
     }
   }, [sort])
   
   const onSubmit: SubmitHandler<Inputs> = ({q, ...data}) => {
+    let qstring = q;
+    if(data.language) {
+      qstring = qstring + `+language=${data.language}`
+    }
+    if(data.starGazers) {
+      qstring = qstring + `+starGazers=${data.starGazers}`
+    }
+    if (data.followers) {
+      qstring = qstring + `+followers=${data.followers}`
+    }
     const transformedRequest = {
-      q: `${q}+${new URLSearchParams(data).toString()}`,
+      q: qstring,
       sort
     }
     console.log("tesitng q", transformedRequest, data)
     searchGithub(transformedRequest).then((resp) => {
       dispatch(setSearch(resp.data.items))
       dispatch(addToSearchHistory({
-        search: data.q,
+        search: q,
         results: resp.data.items.slice(1,9)
       }))
     }); 

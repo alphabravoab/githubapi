@@ -10,7 +10,7 @@ function HistoryPage() {
         <>
             <Nav />
             Past searches:
-            {searches.map(search => <SearchResults {...search} />)}
+            {searches.map(search => <SearchResults key={search.search} {...search} />)}
         </>
     )
 }
