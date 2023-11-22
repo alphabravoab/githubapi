@@ -1,8 +1,7 @@
 import { useState } from "react";
-
+import { createUseStyles } from "react-jss";
 import Result from "./Result";
 import { Repo } from "../type/Repo";
-import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
     searchResultContainer: {
@@ -37,7 +36,7 @@ function SearchResults({ search, results}: RenderProps) {
                 Searching for: {search}
             </div>
             <div className={classes.historyResult}>
-            {show && results.slice(0, 9).map((result, id) => <Result result={result} key={result.id} odd={id % 2 === 0} />)}
+            {show && results.slice(0, 10).map((result, id) => <Result result={result} key={result.id} odd={id % 2 === 0} />)}
             </div>
         </div>
     )
