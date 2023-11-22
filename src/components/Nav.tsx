@@ -1,6 +1,7 @@
 import { createUseStyles } from "react-jss"
 import { Link, useLocation } from "react-router-dom"
 import { classNames } from "../tools/classNames";
+import { darkGray, darkYellow, lightYellow } from "../style/styles";
 
 const useStyles = createUseStyles({
     container: {
@@ -12,7 +13,7 @@ const useStyles = createUseStyles({
         padding: [18, 0],
     },
     link: {
-        background: "#6b6a02",
+        background: darkYellow,
         borderRadius: 9,
         padding: 9,
         color: "white",
@@ -20,8 +21,8 @@ const useStyles = createUseStyles({
         width: 200,
     },
     active: {
-        color: "#4a4a4a",
-        background: "#f2f157",
+        color: darkGray,
+        background: lightYellow,
         fontWeight: 600,
         boxShadow: "10px 5px 5px lightgray"
     }

@@ -1,6 +1,7 @@
 import { createUseStyles } from "react-jss";
 import { Repo } from "../type/Repo";
 import { classNames } from "../tools/classNames";
+import { grayBlue } from "../style/styles";
 
 const useStyles = createUseStyles({
     container: {
@@ -24,7 +25,7 @@ const useStyles = createUseStyles({
         textAlign: "left"
     },
     evenRow: {
-        backgroundColor: "#2a2334",
+        backgroundColor: grayBlue,
         color: "white",
     }
 })

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createUseStyles } from "react-jss";
 import Result from "./Result";
 import { Repo } from "../type/Repo";
+import {lightGray} from "../style/styles";
 
 const useStyles = createUseStyles({
     searchResultContainer: {
@@ -17,7 +18,7 @@ const useStyles = createUseStyles({
         padding: [6,18]
     },
     historyResult: {
-        backgroundColor: "#D1D2D4",
+        backgroundColor: lightGray,
         borderRadius: 6,
         margin: [18, "auto"]
     },

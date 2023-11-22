@@ -2,6 +2,7 @@ import { createUseStyles } from "react-jss";
 import { useAppSelector } from "../tools/hooks";
 import { selectSearch } from "../reducers/search";
 import Result from "./Result";
+import {lightGray} from "../style/styles";
 
 const useStyles = createUseStyles({
     loadingContainer: {
@@ -9,7 +10,7 @@ const useStyles = createUseStyles({
     },
     searchResultContainer: {
         maxWidth: 1024,
-        backgroundColor: "#D1D2D4",
+        backgroundColor: lightGray,
         borderRadius: 6,
         margin: [18, "auto"]
     },

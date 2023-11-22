@@ -1,39 +1,47 @@
 import { useForm, SubmitHandler } from "react-hook-form"
+import { createUseStyles } from "react-jss";
 import { Sort } from "../tools/requests";
 import { useAppDispatch } from "../tools/hooks";
 import { useEffect, useState } from "react";
 import { getSearch } from "../reducers/search"
-import {createUseStyles} from "react-jss";
-import {classNames} from "../tools/classNames";
+import { classNames } from "../tools/classNames";
+import { grayBlue, lightGray, lightYellow } from "../style/styles";
 
 const useStyles = createUseStyles({
   input: {
-    border: [1, "solid", "#2a2334"],
+    border: [1, "solid", grayBlue],
+    padding: 4,
   },
   numberInput: {
-    width: 60,
-    border: [1, "solid", "#2a2334"],
+    width: 75,
+    border: [1, "solid", grayBlue],
+    padding: 4,
   },
   sortContainer: {
     display: "inline",
-    border: [1, "solid", "#2a2334"],
+    outline: [1, "solid", grayBlue],
     fontSize: 12,
-    padding: [1, 0, 1 , 3],
+    padding: [4, 0, 4 , 3],
     whiteSpace: "nowrap",
   },
   sortButton: {
     border: 0,
+    padding: [3, 6],
+    borderLeft: [2, "dashed", lightGray],
+    "&:first-child": {
+      marginLeft: 3,
+    }
   },
   activeSort: {
-    backgroundColor: "#FBE134",
-    background: "#f2f157",
+    backgroundColor: lightYellow,
   },
   submitButton: {
-    backgroundColor: "#2a2E34",
+    backgroundColor: grayBlue,
     color: "white",
     border: 0,
-    padding: 2,
-    width: 60
+    padding: 4,
+    width: 60,
+    outline: [1, "solid", grayBlue],
   }
 })
 
