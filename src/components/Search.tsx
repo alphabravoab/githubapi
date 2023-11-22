@@ -18,13 +18,11 @@ const useStyles = createUseStyles({
     display: "inline",
     border: [1, "solid", "#2a2334"],
     fontSize: 12,
-    padding: [1, 0],
+    padding: [1, 0, 1 , 3],
     whiteSpace: "nowrap",
   },
   sortButton: {
     border: 0,
-    margin:[0,3],
-    padding: 1,
   },
   activeSort: {
     backgroundColor: "#FBE134",
