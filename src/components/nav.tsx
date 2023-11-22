@@ -1,6 +1,6 @@
 import { createUseStyles } from "react-jss"
 import { Link, useLocation } from "react-router-dom"
-
+import { classNames } from "../tools/classNames";
 
 const useStyles = createUseStyles({
     container: {
@@ -34,14 +34,14 @@ function Nav() {
 
     return (
         <div className={classes.container}>
-            <Link 
-                className={`${classes.link} ${pathname === "/" ? classes.active : ""}`} 
+            <Link
+                className={classNames({[classes.link]: true, [classes.active]: pathname === "/"})}
                 to={"/"}
                 >
                     Continue searching
             </Link>
-            <Link 
-                className={`${classes.link} ${pathname === "/history" ? classes.active : ""}`} 
+            <Link
+                className={classNames({[classes.link]: true, [classes.active]: pathname === "/history"})}
                 to={"/history"}
             >
                 View history

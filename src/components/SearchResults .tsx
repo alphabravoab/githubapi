@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Result from "./Result";
 import { Repo } from "../type/Repo";
@@ -26,7 +26,6 @@ type RenderProps = {
 function SearchResults({ search, results}: RenderProps) {
     const classes = useStyles();
     const [show, changeShow] = useState(false)
-
     return (
         <div className={classes.searchResultContainer} onClick={() => changeShow(!show)}>
             <div className={classes.button}>

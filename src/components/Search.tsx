@@ -1,10 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form"
-import { Sort, searchGithub } from "../tools/requests";
+import { Sort } from "../tools/requests";
 import { useAppDispatch } from "../tools/hooks";
-import { setSearch } from "../reducers/search";
-import { addToSearchHistory } from "../reducers/searchHistory";
 import { useEffect, useState } from "react";
-import { json } from "react-router-dom";
+import { getSearch } from "../reducers/search"
 
 type Inputs = {
     q: string;
@@ -39,16 +37,10 @@ function Search() {
       sort
     }
     if(data.q) {
-      searchGithub(transformedRequest).then((resp) => {
-        dispatch(setSearch(resp.data.items))
-        // dispatch(addToSearchHistory({
-        //   search: data.q,
-        //   results: resp.data.items.slice(1,9)
-        // }))
-      });
+      dispatch(getSearch(transformedRequest));
     }
-  }, [sort])
-  
+  }, [sort, dispatch, getValues])
+
   const onSubmit: SubmitHandler<Inputs> = ({q, ...data}) => {
     let qstring = q;
     if(data.language) {
@@ -64,14 +56,7 @@ function Search() {
       q: qstring,
       sort
     }
-    console.log("tesitng q", transformedRequest, data)
-    searchGithub(transformedRequest).then((resp) => {
-      dispatch(setSearch(resp.data.items))
-      dispatch(addToSearchHistory({
-        search: q,
-        results: resp.data.items.slice(1,9)
-      }))
-    }); 
+    dispatch(getSearch(transformedRequest));
   }
 
   return (
