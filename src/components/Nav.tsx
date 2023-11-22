@@ -5,13 +5,11 @@ import { classNames } from "../tools/classNames";
 const useStyles = createUseStyles({
     container: {
         display: "flex",
-        width: "100dvw",
         justifyContent: "center",
         alignItems: "center",
         gap: 40,
-        marginBottom: 36,
+        marginBottom: 18,
         padding: [18, 0],
-        borderBottom: "3px solid white",
     },
     link: {
         background: "#6b6a02",
@@ -19,12 +17,13 @@ const useStyles = createUseStyles({
         padding: 9,
         color: "white",
         textDecoration: "none",
-        fontWeight: 600,
-        width: 400
+        width: 200,
     },
     active: {
         color: "#4a4a4a",
         background: "#f2f157",
+        fontWeight: 600,
+        boxShadow: "10px 5px 5px lightgray"
     }
 })
 

@@ -3,17 +3,53 @@ import { Sort } from "../tools/requests";
 import { useAppDispatch } from "../tools/hooks";
 import { useEffect, useState } from "react";
 import { getSearch } from "../reducers/search"
+import {createUseStyles} from "react-jss";
+import {classNames} from "../tools/classNames";
+
+const useStyles = createUseStyles({
+  input: {
+    border: [1, "solid", "#2a2334"],
+  },
+  numberInput: {
+    width: 60,
+    border: [1, "solid", "#2a2334"],
+  },
+  sortContainer: {
+    display: "inline",
+    border: [1, "solid", "#2a2334"],
+    fontSize: 12,
+    padding: [1, 0],
+    whiteSpace: "nowrap",
+  },
+  sortButton: {
+    border: 0,
+    margin:[0,3],
+    padding: 1,
+  },
+  activeSort: {
+    backgroundColor: "#FBE134",
+    background: "#f2f157",
+  },
+  submitButton: {
+    backgroundColor: "#2a2E34",
+    color: "white",
+    border: 0,
+    padding: 2,
+    width: 60
+  }
+})
 
 type Inputs = {
     q: string;
     followers: string;
-    starGazers: string;
+    starGazers: string; // backend sees them as strings so instead of casting there I set them correct here
     language: string;
-  }
+}
 
 function Search() {
   const dispatch = useAppDispatch();
-  const [sort, changeSort] = useState<Sort>("updated")
+  const classes = useStyles();
+  const [sort, changeSort] = useState<Sort>("updated");
   const {
     register,
     getValues,
@@ -35,7 +71,7 @@ function Search() {
     const transformedRequest = {
       q: qstring,
       sort
-    }
+    };
     if(data.q) {
       dispatch(getSearch(transformedRequest));
     }
@@ -62,15 +98,33 @@ function Search() {
   return (
     <>
       <div>
-        <form  onSubmit={handleSubmit(onSubmit)}>
-          <input placeholder="Basic search" {...register("q")} />
-          <input placeholder="programming language e.g. python" {...register("language")} />
-          <input placeholder="stars" type="number" {...register("starGazers")} />
-          <input placeholder="followers" type="number" {...register("followers")} />
-          <input type="submit" />
-          <button onClick={() => changeSort("stars")}>Stars</button>
-          <button onClick={() => changeSort("forks")}>Forks</button>
-          <button onClick={() => changeSort("updated")}>Updated</button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input className={classes.input} placeholder="Basic search" {...register("q")} />
+          <input className={classes.input} placeholder="Language e.g. python" {...register("language")} />
+          <input className={classes.numberInput} placeholder="Stars" type="number" {...register("starGazers")} />
+          <input className={classes.numberInput} placeholder="Followers" type="number" {...register("followers")} />
+          <div className={classes.sortContainer}>
+            Sort by
+            <button
+                className={classNames({[classes.sortButton]: true, [classes.activeSort]: sort === "stars"})}
+                onClick={() => changeSort("stars")}
+            >
+              Stars
+            </button>
+            <button
+                className={classNames({[classes.sortButton]: true, [classes.activeSort]: sort === "forks"})}
+                onClick={() => changeSort("forks")}
+            >
+              Forks
+            </button>
+            <button
+                className={classNames({[classes.sortButton]: true, [classes.activeSort]: sort === "updated"})}
+                onClick={() => changeSort("updated")}
+            >
+              Updated
+            </button>
+          </div>
+          <button className={classes.submitButton} type="submit">Search</button>
         </form>
       </div>
     </>

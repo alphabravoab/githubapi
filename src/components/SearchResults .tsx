@@ -16,7 +16,12 @@ const useStyles = createUseStyles({
         background: "transparent",
         border: "none",
         padding: [6,18]
-    }
+    },
+    historyResult: {
+        backgroundColor: "#D1D2D4",
+        borderRadius: 6,
+        margin: [18, "auto"]
+    },
 })
 
 type RenderProps = {
@@ -31,7 +36,9 @@ function SearchResults({ search, results}: RenderProps) {
             <div className={classes.button}>
                 Searching for: {search}
             </div>
-            {show && results.map((result) => <Result result={result} key={result.id} />)}
+            <div className={classes.historyResult}>
+            {show && results.slice(0, 9).map((result, id) => <Result result={result} key={result.id} odd={id % 2 === 0} />)}
+            </div>
         </div>
     )
 }
