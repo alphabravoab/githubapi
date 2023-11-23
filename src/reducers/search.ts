@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../store"
-import {searchGithub, Sort} from "../tools/requests";
-import {Repo} from "../type/Repo";
+import { searchGithub, Sort } from "../tools/requests";
+import { Repo } from "../type/Repo";
 
 export const getSearch = createAsyncThunk(
     "search/fetchSearch",
-    async(search: {q: string, sort: Sort}) => {
-        const response = await searchGithub(search)
+    async(search: { q: string, sort: Sort }) => {
+        const response = await searchGithub(search);
         return {
             history: search, result: response?.data.items
         }
@@ -33,17 +33,17 @@ export const searchSlice = createSlice({
     initialState,
     reducers: {
         setSearch: (state, action) => {
-            state.value = action.payload
+            state.value = action.payload;
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(getSearch.pending, (state) => {
-                state.status = "loading"
+                state.status = "loading";
             })
             .addCase(getSearch.fulfilled, (state, action) => {
-                state.status = "succeeded"
-                state.value = state.value.concat(action.payload as { history: SearchHistory, result: Array<Repo>})
+                state.status = "succeeded";
+                state.value = state.value.concat(action.payload as { history: SearchHistory, result: Array<Repo>});
             })
     }
 })

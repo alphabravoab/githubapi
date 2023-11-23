@@ -47,8 +47,8 @@ const useStyles = createUseStyles({
 
 type Inputs = {
     q: string;
-    followers: string;
-    starGazers: string; // backend sees them as strings so instead of casting there I set them correct here
+    followers: number;
+    starGazers: number;
     language: string;
 }
 
