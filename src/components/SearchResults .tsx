@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { createUseStyles } from "react-jss";
 import Result from "./Result";
-import { lightGray } from "../style/styles";
+import { lightGray, mobileDevices, spacingMedium, spacingSmall } from "../style/styles";
 
 const useStyles = createUseStyles({
     searchResultContainer: {
         maxWidth: 1024,
-        margin: [18, "auto"],
+        margin: [spacingMedium, "auto"],
         border: [2, "solid", "white"],
-        padding: 18,
+        padding: spacingMedium,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -20,12 +20,16 @@ const useStyles = createUseStyles({
         width: 200,
         background: "transparent",
         border: "none",
-        padding: [6,18]
+        padding: [spacingSmall,spacingMedium]
     },
     historyResult: {
         backgroundColor: lightGray,
+        maxWidth: `calc(100vw - ${spacingMedium * 4}px)`,
         borderRadius: 6,
-        margin: [18, "auto"]
+        margin: [spacingMedium, "auto"],
+        [`@media(max-width : ${mobileDevices}px)`]: {
+            maxWidth: `calc(100vw - ${spacingMedium * 4}px)`,
+        }
     },
 })
 
@@ -35,11 +39,11 @@ type RenderProps = {
 }
 function SearchResults({ search, results}: RenderProps) {
     const classes = useStyles();
-    const [show, changeShow] = useState(false)
+    const [show, changeShow] = useState<boolean>(false)
     return (
         <div className={classes.searchResultContainer} onClick={() => changeShow(!show)}>
             <div className={classes.button}>
-                Searching for: {search}
+                {search}
             </div>
             {show && <div className={classes.historyResult}>
                 {results.slice(0, 10).map((result, id) => <Result result={result} key={result} odd={id % 2 === 0} />)}

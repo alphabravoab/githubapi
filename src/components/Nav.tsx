@@ -1,7 +1,8 @@
 import { createUseStyles } from "react-jss"
 import { Link, useLocation } from "react-router-dom"
 import { classNames } from "../tools/classNames";
-import { darkGray, darkYellow, lightYellow } from "../style/styles";
+import { darkGray, darkYellow, lightYellow, mobileDevices, spacingMedium } from "../style/styles";
+
 
 const useStyles = createUseStyles({
     container: {
@@ -9,16 +10,29 @@ const useStyles = createUseStyles({
         justifyContent: "center",
         alignItems: "center",
         gap: 40,
-        marginBottom: 18,
-        padding: [18, 0],
+        marginBottom: spacingMedium,
+        padding: [spacingMedium, 0],
     },
     link: {
         background: darkYellow,
-        borderRadius: 9,
-        padding: 9,
+        borderRadius: spacingMedium / 2,
+        padding: spacingMedium / 2,
         color: "white",
         textDecoration: "none",
-        width: 200,
+        width: 80,
+        [`@media(min-width : ${mobileDevices}px)`]: {
+            width: 200,
+        }
+    },
+    hideOnMobile: {
+        [`@media(max-width : ${mobileDevices}px)`]: {
+            display: "none",
+        }
+    },
+    hideOnDesktop: {
+        [`@media(min-width : ${mobileDevices}px)`]: {
+            display: "none",
+        }
     },
     active: {
         color: darkGray,
@@ -30,7 +44,7 @@ const useStyles = createUseStyles({
 
 function Nav() {
     const classes = useStyles()
-    const { pathname} = useLocation();
+    const { pathname } = useLocation();
 
     return (
         <div className={classes.container}>
@@ -38,13 +52,15 @@ function Nav() {
                 className={classNames({[classes.link]: true, [classes.active]: pathname === "/"})}
                 to={"/"}
                 >
-                    Continue searching
+                <span className={classes.hideOnDesktop}>Search</span>
+                <span className={classes.hideOnMobile}>Continue searching</span>
             </Link>
             <Link
                 className={classNames({[classes.link]: true, [classes.active]: pathname === "/history"})}
                 to={"/history"}
             >
-                View history
+                <span className={classes.hideOnDesktop}>History</span>
+                <span className={classes.hideOnMobile}>View history</span>
             </Link>
         </div>
     )

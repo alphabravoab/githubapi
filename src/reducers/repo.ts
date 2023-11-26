@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { Repo } from "../type/Repo";
-import {RootState} from "../store";
+import { RootState } from "../store";
 
 interface RepoState {
     value: Repo[]
@@ -15,6 +15,7 @@ export const repoSlice = createSlice({
     initialState,
     reducers: {
         setRepo: (state, action) => {
+            // By converting it to a set inbetween we make sure we do not store duplicate repo's in the store.
             state.value = [...new Set(state.value.concat(action.payload))]
         },
     },

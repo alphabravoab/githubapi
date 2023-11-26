@@ -2,17 +2,17 @@ import { createUseStyles } from "react-jss";
 import { useAppSelector } from "../tools/hooks";
 import { selectSearch } from "../reducers/search";
 import Result from "./Result";
-import { lightGray } from "../style/styles";
+import { lightGray, spacingMedium } from "../style/styles";
 
 const useStyles = createUseStyles({
     loadingContainer: {
-        margin: [18, "auto"]
+        margin: [spacingMedium, "auto"]
     },
     searchResultContainer: {
         maxWidth: 1024,
         backgroundColor: lightGray,
         borderRadius: 6,
-        margin: [18, "auto"]
+        margin: [spacingMedium, "auto"]
     },
 })
 function SearchResults() {

@@ -1,6 +1,6 @@
 import { createUseStyles } from "react-jss";
 import { classNames } from "../tools/classNames";
-import { grayBlue } from "../style/styles";
+import { grayBlue, mobileDevices, spacingMedium, spacingSmall } from "../style/styles";
 import { useAppSelector } from "../tools/hooks";
 import { selectRepo } from "../reducers/repo";
 
@@ -8,11 +8,12 @@ const useStyles = createUseStyles({
     container: {
         display: "flex",
         flexWrap: "wrap",
-        gap: 6,
+        justifyContent: "space-between",
+        gap: spacingSmall,
         alignItems: "baseline",
-        marginBottom: 12,
+        marginBottom: spacingSmall * 2,
         fontSize: 16,
-        padding: [9, 18]
+        padding: [spacingMedium / 2, spacingMedium]
     },
     textContainer: {
         textAlign: "left",
@@ -20,6 +21,11 @@ const useStyles = createUseStyles({
     title: {
         fontWeight: 600,
         flexShrink: 0,
+        [`@media(max-width : ${mobileDevices}px)`]: {
+            textAlign: "left",
+            overflow: "hidden",
+            flexBasis: "100%",
+        },
     },
     description: {
         flexBasis: "100%",
@@ -42,6 +48,8 @@ function Result({result, odd}: RenderProps) {
         <div className={classNames({[classes.container]: true, [classes.evenRow]: odd}) }>
             <div className={classes.title}>Title: {repo?.name}</div>
             <div>Maker: {repo?.owner.login}</div>
+            <div>Forks: {repo?.forks}</div>
+            <div>Stars: {repo?.stargazers_count}</div>
             <div className={classes.description}>Description: {repo?.description}</div>
         </div>
     )
