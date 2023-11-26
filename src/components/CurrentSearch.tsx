@@ -2,7 +2,7 @@ import { createUseStyles } from "react-jss";
 import { useAppSelector } from "../tools/hooks";
 import { selectSearch } from "../reducers/search";
 import Result from "./Result";
-import {lightGray} from "../style/styles";
+import { lightGray } from "../style/styles";
 
 const useStyles = createUseStyles({
     loadingContainer: {
@@ -26,7 +26,8 @@ function SearchResults() {
     }
     return (
         <div className={classes.searchResultContainer}>
-            {results.value[0].result.map((result, i) => <Result result={result} key={result.id} odd={i % 2 !== 0} />)}
+            {results.value[0].result.map((result, i) =>
+                <Result result={result} key={result} odd={i % 2 !== 0} />)}
         </div>
     )
 }

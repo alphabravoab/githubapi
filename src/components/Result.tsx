@@ -1,7 +1,8 @@
 import { createUseStyles } from "react-jss";
-import { Repo } from "../type/Repo";
 import { classNames } from "../tools/classNames";
 import { grayBlue } from "../style/styles";
+import { useAppSelector } from "../tools/hooks";
+import { selectRepo } from "../reducers/repo";
 
 const useStyles = createUseStyles({
     container: {
@@ -30,17 +31,18 @@ const useStyles = createUseStyles({
     }
 })
 type RenderProps = {
-    result: Repo,
+    result: number,
     odd: boolean;
 }
 
 function Result({result, odd}: RenderProps) {
     const classes = useStyles();
+    const repo = useAppSelector(selectRepo(result));
     return (
         <div className={classNames({[classes.container]: true, [classes.evenRow]: odd}) }>
-            <div className={classes.title}>Title: {result.name}</div>
-            <div>Maker: {result.owner.login}</div>
-            <div className={classes.description}>Description: {result.description}</div>
+            <div className={classes.title}>Title: {repo?.name}</div>
+            <div>Maker: {repo?.owner.login}</div>
+            <div className={classes.description}>Description: {repo?.description}</div>
         </div>
     )
 }

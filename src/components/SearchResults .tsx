@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { createUseStyles } from "react-jss";
 import Result from "./Result";
-import { Repo } from "../type/Repo";
-import {lightGray} from "../style/styles";
+import { lightGray } from "../style/styles";
 
 const useStyles = createUseStyles({
     searchResultContainer: {
         maxWidth: 1024,
         margin: [18, "auto"],
         border: [2, "solid", "white"],
-        padding: 18
+        padding: 18,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        "@media(min-width : 1100px)": {
+            width: 1024,
+        },
     },
     button: {
         width: 200,
@@ -26,7 +31,7 @@ const useStyles = createUseStyles({
 
 type RenderProps = {
     search: string,
-    results: Array<Repo>
+    results: number[],
 }
 function SearchResults({ search, results}: RenderProps) {
     const classes = useStyles();
@@ -36,9 +41,9 @@ function SearchResults({ search, results}: RenderProps) {
             <div className={classes.button}>
                 Searching for: {search}
             </div>
-            <div className={classes.historyResult}>
-            {show && results.slice(0, 10).map((result, id) => <Result result={result} key={result.id} odd={id % 2 === 0} />)}
-            </div>
+            {show && <div className={classes.historyResult}>
+                {results.slice(0, 10).map((result, id) => <Result result={result} key={result} odd={id % 2 === 0} />)}
+            </div>}
         </div>
     )
 }

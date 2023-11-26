@@ -1,6 +1,6 @@
 import SearchResults from "../components/SearchResults ";
 import Nav from "../components/Nav";
-import { selectSearch} from "../reducers/search";
+import { selectSearch } from "../reducers/search";
 import { useAppSelector } from "../tools/hooks";
 
 

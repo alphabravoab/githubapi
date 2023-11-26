@@ -1,14 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../store"
 import { searchGithub, Sort } from "../tools/requests";
-import { Repo } from "../type/Repo";
+import { setRepo } from "./repo";
 
 export const getSearch = createAsyncThunk(
     "search/fetchSearch",
-    async(search: { q: string, sort: Sort }) => {
+    async(search: { q: string, sort: Sort }, thunkAPI) => {
         const response = await searchGithub(search);
+        const transformResponse = response?.data.items.map(repo => {
+            const repoWithId = repo
+            thunkAPI.dispatch(setRepo(repoWithId))
+          return repo.id
+        });
         return {
-            history: search, result: response?.data.items
+            history: search, result: transformResponse
         }
     }
 )
@@ -19,7 +24,7 @@ type SearchHistory = {
 }
 
 export interface SearchInterface  {
-    value: Array<{ history: SearchHistory, result: Array<Repo>}>;
+    value: Array<{ history: SearchHistory, result: Array<number>}>;
     status: "idle" | "loading" | "succeeded"
 }
 
@@ -43,12 +48,10 @@ export const searchSlice = createSlice({
             })
             .addCase(getSearch.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.value = state.value.concat(action.payload as { history: SearchHistory, result: Array<Repo>});
+                state.value = state.value.concat(action.payload as { history: SearchHistory, result: Array<number>});
             })
     }
 })
-
-export const { setSearch } = searchSlice.actions
 
 export const selectSearch = (state: RootState) => state.search
 
